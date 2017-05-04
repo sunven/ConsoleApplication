@@ -21,7 +21,6 @@ namespace DIPDIIOC
 
         static void Main(string[] args)
         {
-
             //var om = new OperationMain();
             //om.PlayMedia();
 
@@ -59,6 +58,8 @@ namespace DIPDIIOC
 
             Console.ReadKey();
         }
+
+        
 
         /// <summary>
         /// 瞬态生命周期，默认情况下，在使用RegisterType进行对象关系注册时如果没有指定生命周期管理器则默认使用这个生命周期管理器，这个生命周期管理器就如同其名字一样，当使用这种管理器的时候，每次通过Resolve或ResolveAll调用对象的时候都会重新创建一个新的对象。
@@ -137,13 +138,13 @@ namespace DIPDIIOC
 
             Console.WriteLine("-------PerResolveLifetimeManager Begin------");
             Console.WriteLine("使用了PerResolveLifetimeManager的对象 Begin");
-            Console.WriteLine("通过Resolve方法获取的View对象：" +view.GetHashCode());
-            Console.WriteLine("View对象中的Presenter对象所包含的View对象：" +realPresenter.View.GetHashCode());
+            Console.WriteLine("通过Resolve方法获取的View对象：" + view.GetHashCode());
+            Console.WriteLine("View对象中的Presenter对象所包含的View对象：" + realPresenter.View.GetHashCode());
             Console.WriteLine("使用了PerResolveLifetimeManager的对象 End");
             Console.WriteLine("");
             Console.WriteLine("未使用PerResolveLifetimeManager的对象 Begin");
-            Console.WriteLine("View对象中的Presenter对象：" +realPresenter.GetHashCode());
-            Console.WriteLine("通过Resolve方法获取的View对象：" +tempPresenter.GetHashCode());
+            Console.WriteLine("View对象中的Presenter对象：" + realPresenter.GetHashCode());
+            Console.WriteLine("通过Resolve方法获取的View对象：" + tempPresenter.GetHashCode());
             Console.WriteLine("未使用PerResolveLifetimeManager的对象 End");
             Console.WriteLine("-------PerResolveLifetimeManager Begin------");
         }
@@ -157,8 +158,8 @@ namespace DIPDIIOC
             var thread = new Thread(Thread1);
             Console.WriteLine("-------PerResolveLifetimeManager Begin------");
             Console.WriteLine("默认线程 Begin");
-            Console.WriteLine("第一调用:" +Container.Resolve<IClass>().GetHashCode());
-            Console.WriteLine("第二调用:" +Container.Resolve<IClass>().GetHashCode());
+            Console.WriteLine("第一调用:" + Container.Resolve<IClass>().GetHashCode());
+            Console.WriteLine("第二调用:" + Container.Resolve<IClass>().GetHashCode());
             Console.WriteLine("默认线程 End");
             thread.Start(Container);
         }
@@ -166,8 +167,8 @@ namespace DIPDIIOC
         {
             var tmpContainer = obj as UnityContainer;
             Console.WriteLine("新建线程 Begin");
-            Console.WriteLine("第一调用:" +tmpContainer.Resolve<IClass>().GetHashCode());
-            Console.WriteLine("第二调用:" +tmpContainer.Resolve<IClass>().GetHashCode());
+            Console.WriteLine("第一调用:" + tmpContainer.Resolve<IClass>().GetHashCode());
+            Console.WriteLine("第二调用:" + tmpContainer.Resolve<IClass>().GetHashCode());
             Console.WriteLine("新建线程 End");
             Console.WriteLine("-------PerResolveLifetimeManager End------");
         }
@@ -181,13 +182,13 @@ namespace DIPDIIOC
             var myClass1 = Container.Resolve<IClass>();
             var myClass2 = Container.Resolve<IClass>();
             Console.WriteLine("-------ExternallyControlledLifetimeManager Begin------");
-            Console.WriteLine("第一次调用：" +myClass1.GetHashCode());
-            Console.WriteLine("第二次调用：" +myClass2.GetHashCode());
+            Console.WriteLine("第一次调用：" + myClass1.GetHashCode());
+            Console.WriteLine("第二次调用：" + myClass2.GetHashCode());
             myClass1 = myClass2 = null;
             GC.Collect();
             Console.WriteLine("****GC回收过后****");
-            Console.WriteLine("第一次调用：" +Container.Resolve<IClass>().GetHashCode());
-            Console.WriteLine("第二次调用：" +Container.Resolve<IClass>().GetHashCode());
+            Console.WriteLine("第一次调用：" + Container.Resolve<IClass>().GetHashCode());
+            Console.WriteLine("第二次调用：" + Container.Resolve<IClass>().GetHashCode());
             Console.WriteLine("-------ExternallyControlledLifetimeManager End------");
         }
     }
