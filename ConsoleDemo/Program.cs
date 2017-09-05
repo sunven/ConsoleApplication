@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,10 +11,21 @@ namespace ConsoleDemo
     {
         static void Main(string[] args)
         {
+
+
+
             Permission permission = Permission.create | Permission.read | Permission.update | Permission.delete;
             Console.WriteLine("1、枚举创建，并赋值……");
             Console.WriteLine(permission.ToString());
             Console.WriteLine((int)permission);
+
+
+            permission = permission & Permission.read;
+            Console.WriteLine("5、去掉一个枚举项……");
+            Console.WriteLine(permission.ToString());
+            Console.WriteLine((int)permission);
+
+            Console.ReadKey();
 
             permission = (Permission)Enum.Parse(typeof(Permission), "5");
             Console.WriteLine("2、通过数字字符串转换……");
@@ -41,6 +53,23 @@ namespace ConsoleDemo
             Console.WriteLine((int)permission);
             Console.ReadKey();
         }
+
+        static void Abc(Teacher t)
+        {
+            t.Age = 10;
+        }
+    }
+
+    class Teacher
+    {
+        public int Age { get; set; }
+        public string Name { get; set; }
+    }
+
+    class Teacher1
+    {
+        public int Age { get; set; }
+        public string Name { get; set; }
     }
 
     [Flags]
